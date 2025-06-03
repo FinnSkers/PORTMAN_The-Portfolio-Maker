@@ -110,4 +110,15 @@ PORTMAN is a modern, open-source system that transforms a user's CV into a dynam
 - See `tests/` for example tests.
 
 ---
+
+## GitHub Repository
+
+This project is open source and available on GitHub:
+
+- **Repository:** https://github.com/FinnSkers/PORTMAN_The-Portfolio-Maker
+- **Initial Commit:** Full stack, docs, parser, frontend, backend, batch, config, and tests (commit c89774f)
+- All code, documentation, and setup scripts are included for reproducibility and collaboration.
+
+---
+
 For more details, see the full architecture report in `CV-to-Dynamic-Website-Generator-Report.txt.txt` and the documentation in `docs/`.
