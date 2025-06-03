@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTMAN CV Extraction Tester</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .input-section, .output-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        textarea {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .result-json {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-success { background: #28a745; }
+        .status-error { background: #dc3545; }
+        .status-warning { background: #ffc107; }
+
+        .sample-cvs {
+            margin-bottom: 20px;
+        }
+
+        .sample-cv-button {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #8b4513;
+            font-size: 14px;
+            padding: 8px 16px;
+            margin: 5px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 PORTMAN CV Extraction Tester</h1>
+            <p>Enhanced AI-powered CV parsing with LLM and regex fallback</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title">
+                    <span class="icon"></span>
+                    CV Input
+                </h2>
+
+                <div class="sample-cvs">
+                    <p style="margin-bottom: 10px;"><strong>Quick Test Samples:</strong></p>
+                    <button class="sample-cv-button" onclick="loadSampleCV('tech')">Tech Professional</button>
+                    <button class="sample-cv-button" onclick="loadSampleCV('marketing')">Marketing Manager</button>
+                    <button class="sample-cv-button" onclick="loadSampleCV('simple')">Simple CV</button>
+                </div>
+
+                <textarea id="cvInput" placeholder="Paste your CV text here or click a sample button above...
+
+Example format:
+John Smith
+Software Engineer
+john.smith@email.com
+(555) 123-4567
+
+Education:
+BS Computer Science, MIT, 2020
+
+Experience:
+Senior Developer at Google (2020-2023)
+- Built scalable applications
+- Led team of 5 developers
+
+Skills: Python, JavaScript, React, AWS"></textarea>
+
+                <div class="button-group">
+                    <button id="extractBtn" onclick="extractCV()">
+                        🔍 Extract CV Data
+                    </button>
+                    <button onclick="clearAll()">🗑️ Clear All</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2 class="section-title">
+                    <span class="icon"></span>
+                    Extraction Results
+                </h2>
+
+                <div id="statusIndicator" style="margin-bottom: 15px;">
+                    <span class="status-indicator status-warning"></span>
+                    Ready to extract CV data
+                </div>
+
+                <div id="extractionResults" class="result-json">
+                    Results will appear here after extraction...
+                </div>
+
+                <div class="stats" id="statsSection" style="display: none;">
+                    <div class="stat-card">
+                        <div class="stat-number" id="statFields">0</div>
+                        <div class="stat-label">Fields Found</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statSkills">0</div>
+                        <div class="stat-label">Skills</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statExperience">0</div>
+                        <div class="stat-label">Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statEducation">0</div>
+                        <div class="stat-label">Education</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sampleCVs = {
+            tech: `John Smith
+Software Engineer
+Email: john.smith@techcorp.com
+Phone: +1-555-123-4567
+
+PROFESSIONAL SUMMARY
+Experienced Software Engineer with 5+ years developing scalable web applications.
+
+EDUCATION
+Bachelor of Science in Computer Science
+Massachusetts Institute of Technology (MIT)
+Graduated: May 2019
+
+WORK EXPERIENCE
+Senior Software Engineer | Google Inc. | Jan 2022 - Present
+• Led development of microservices architecture serving 10M+ users
+• Implemented CI/CD pipelines reducing deployment time by 60%
+• Technologies: Python, JavaScript, React, Node.js, Kubernetes, AWS
+
+Software Engineer | Amazon Web Services | Jun 2019 - Dec 2021
+• Developed RESTful APIs for cloud storage services
+• Optimized database queries improving performance by 40%
+• Technologies: Java, Spring Boot, PostgreSQL, Docker
+
+TECHNICAL SKILLS
+Programming Languages: Python, JavaScript, Java, TypeScript, Go
+Web Technologies: React, Angular, Node.js, Express.js, HTML5, CSS3
+Databases: PostgreSQL, MongoDB, Redis, DynamoDB
+Cloud & DevOps: AWS, Docker, Kubernetes, Jenkins, Terraform`,
+
+            marketing: `Sarah Johnson
+Digital Marketing Manager
+sarah.johnson@marketpro.com | (555) 987-6543
+
+SUMMARY
+Results-driven Digital Marketing Manager with 7+ years of experience.
+
+EDUCATION
+Master of Business Administration (MBA) - Marketing
+Harvard Business School | 2017
+
+PROFESSIONAL EXPERIENCE
+Senior Digital Marketing Manager | TechStartup Inc. | Mar 2020 - Present
+• Increased organic traffic by 150% through SEO optimization
+• Managed $2M annual marketing budget
+• Led team of 8 marketing professionals
+
+Marketing Manager | Creative Agency LLC | Aug 2017 - Feb 2020
+• Developed integrated marketing campaigns for B2B and B2C clients
+• Managed social media accounts with 500K+ following
+
+CORE COMPETENCIES
+Digital Marketing: SEO, SEM, Content Marketing, Email Marketing
+Analytics: Google Analytics, Adobe Analytics, HubSpot, Salesforce
+Social Media: Facebook Ads, LinkedIn Ads, Instagram, Twitter`,
+
+            simple: `Michael Brown
+Web Developer
+mike.brown@email.com
+(555) 444-3333
+
+Education:
+BS Web Development, State University, 2021
+
+Experience:
+Junior Developer at StartupCorp (2021-2023)
+Front-end Developer at WebAgency (2023-Present)
+
+Skills:
+HTML, CSS, JavaScript, React, Vue.js, PHP, MySQL`
+        };
+
+        function loadSampleCV(type) {
+            document.getElementById('cvInput').value = sampleCVs[type];
+        }
+
+        function clearAll() {
+            document.getElementById('cvInput').value = '';
+            document.getElementById('extractionResults').textContent = 'Results will appear here after extraction...';
+            updateStatus('warning', 'Ready to extract CV data');
+            document.getElementById('statsSection').style.display = 'none';
+        }
+
+        function updateStatus(type, message) {
+            const indicator = document.getElementById('statusIndicator');
+            indicator.innerHTML = `<span class="status-indicator status-${type}"></span>${message}`;
+        }
+
+        function updateStats(data) {
+            const fields = ['name', 'email', 'phone'].filter(field => data[field] && data[field].trim()).length;
+            const skills = data.skills ? data.skills.length : 0;
+            const experience = data.experience ? data.experience.length : 0;
+            const education = data.education ? data.education.length : 0;
+
+            document.getElementById('statFields').textContent = fields;
+            document.getElementById('statSkills').textContent = skills;
+            document.getElementById('statExperience').textContent = experience;
+            document.getElementById('statEducation').textContent = education;
+            document.getElementById('statsSection').style.display = 'grid';
+        }
+
+        async function extractCV() {
+            const cvText = document.getElementById('cvInput').value.trim();
+            const extractBtn = document.getElementById('extractBtn');
+            const resultsDiv = document.getElementById('extractionResults');
+
+            if (!cvText) {
+                updateStatus('error', 'Please enter CV text first');
+                return;
+            }
+
+            // Update UI for loading state
+            extractBtn.disabled = true;
+            extractBtn.innerHTML = '<span class="loading"></span>Extracting...';
+            updateStatus('warning', 'Processing CV with AI...');
+            resultsDiv.textContent = 'Analyzing CV content...';
+
+            try {
+                const response = await fetch('http://localhost:6000/parse-cv', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: cvText })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    updateStatus('success', 'CV extraction completed successfully!');
+                    resultsDiv.textContent = JSON.stringify(data, null, 2);
+                    updateStats(data);
+                } else {
+                    const errorData = await response.json();
+                    updateStatus('error', `Extraction failed: ${response.status}`);
+                    resultsDiv.textContent = `Error: ${JSON.stringify(errorData, null, 2)}`;
+                }
+            } catch (error) {
+                updateStatus('error', 'Connection failed - is the CV parser service running?');
+                resultsDiv.textContent = `Connection Error: ${error.message}\n\nMake sure the CV parser service is running on http://localhost:6000`;
+            } finally {
+                extractBtn.disabled = false;
+                extractBtn.innerHTML = '🔍 Extract CV Data';
+            }
+        }
+
+        // Auto-check service status on load
+        window.addEventListener('load', async () => {
+            try {
+                const response = await fetch('http://localhost:6000/health');
+                if (response.ok) {
+                    updateStatus('success', 'CV extraction service is online and ready');
+                } else {
+                    updateStatus('warning', 'Service health check returned an error');
+                }
+            } catch (error) {
+                updateStatus('error', 'CV extraction service is offline - please start it first');
+            }
+        });
+    </script>
+</body>
+</html>

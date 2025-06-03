@@ -1,0 +1,104 @@
+{
+  "skill_mappings": {
+    "programming": [
+      "Python",
+      "JavaScript",
+      "Java",
+      "C++",
+      "C#",
+      "Go",
+      "Rust",
+      "PHP",
+      "Ruby",
+      "Swift",
+      "Kotlin"
+    ],
+    "web_frameworks": [
+      "React",
+      "Angular",
+      "Vue.js",
+      "Django",
+      "Flask",
+      "Express.js",
+      "Spring Boot",
+      "ASP.NET"
+    ],
+    "databases": [
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Elasticsearch",
+      "SQLite",
+      "Oracle"
+    ],
+    "cloud_platforms": [
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "DigitalOcean",
+      "Heroku",
+      "Vercel"
+    ],
+    "devops_tools": [
+      "Docker",
+      "Kubernetes",
+      "Jenkins",
+      "GitLab CI",
+      "GitHub Actions",
+      "Terraform"
+    ],
+    "data_science": [
+      "Pandas",
+      "NumPy",
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "Jupyter",
+      "R"
+    ]
+  },
+  "company_industries": {
+    "tech_giants": [
+      "Google",
+      "Microsoft",
+      "Amazon",
+      "Apple",
+      "Meta",
+      "Netflix"
+    ],
+    "consulting": [
+      "McKinsey",
+      "BCG",
+      "Deloitte",
+      "Accenture",
+      "PwC"
+    ],
+    "finance": [
+      "Goldman Sachs",
+      "Morgan Stanley",
+      "JPMorgan",
+      "BlackRock"
+    ],
+    "startups": [
+      "Y Combinator",
+      "Techstars",
+      "500 Startups"
+    ]
+  },
+  "education_rankings": {
+    "top_universities": [
+      "MIT",
+      "Stanford",
+      "Harvard",
+      "Caltech",
+      "UC Berkeley"
+    ],
+    "business_schools": [
+      "Wharton",
+      "Harvard Business School",
+      "Stanford GSB",
+      "Kellogg"
+    ]
+  }
+}

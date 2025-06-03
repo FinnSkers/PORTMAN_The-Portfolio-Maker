@@ -1,3 +1,3 @@
-# Backend for CV-to-Dynamic-Website Generator
+# PORTMAN: The Portfolio Maker — Backend
 
-This folder will contain Node.js/Express and Python microservices for API, CV parsing, and AI.
+This folder contains Node.js/Express and Python microservices for the PORTMAN: CV-to-Dynamic-Website Generator API, CV parsing, and AI modules.

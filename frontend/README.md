@@ -1,3 +1,3 @@
-# Frontend for CV-to-Dynamic-Website Generator
+# PORTMAN: The Portfolio Maker — Frontend
 
-This folder will contain the Next.js/React app for the user interface.
+This folder contains the Next.js/React app for the PORTMAN: CV-to-Dynamic-Website Generator user interface.

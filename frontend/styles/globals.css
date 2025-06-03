@@ -1,10 +1,199 @@
-/* Placeholder for global styles */
+/* Modern, dynamic, and accessible global styles for PORTMAN */
+:root {
+  --color-primary: #3949ab;
+  --color-secondary: #f5f5f5;
+  --color-accent: #ffb300;
+  --font-family-base: 'Roboto', Arial, sans-serif;
+  --border-radius: 12px;
+  --spacing: 1.2rem;
+}
 body {
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family-base);
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
+  background: linear-gradient(120deg, #181a1b 0%, #23272f 100%);
+  color: #e3e6f0;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  transition: background 0.5s;
+  background-size: 200% 200%;
+  animation: gradientMove 12s ease-in-out infinite;
 }
-h1 {
-  color: #2d3748;
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+h1, h2, h3 {
+  color: #b3c0ff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: rgba(35,39,47,0.98);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 32px #3949ab22;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  animation: fadeInUp 1.1s;
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ServiceStatus component animations */
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.1; }
+  100% { opacity: 0.3; }
+}
+
+input, textarea, button {
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #3949ab44;
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.7rem;
+  background: #23272f;
+  color: #b3c0ff;
+  transition: border 0.2s, background 0.2s;
+}
+input:focus, textarea:focus {
+  border-color: var(--color-accent);
+  outline: none;
+  background: #23272f;
+}
+button {
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  color: #222;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #3949ab22;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover, button:focus {
+  background: linear-gradient(90deg, #ffb300 0%, #43e97b 100%);
+  color: #222;
+}
+label {
+  font-weight: 500;
+  color: #b3c0ff;
+}
+pre {
+  background: #181a1b;
+  color: #e3e6f0;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow-x: auto;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  background: #23272f;
+}
+::-webkit-scrollbar-thumb {
+  background: #3949ab44;
+  border-radius: 8px;
+}
+.portman-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: none;
+}
+.portman-header {
+  width: 100vw;
+  background: #23272f;
+  box-shadow: 0 2px 16px #3949ab22;
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+.logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px #3949ab33;
+}
+nav {
+  display: flex;
+  gap: 2rem;
+}
+.nav-link {
+  color: #b3c0ff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: var(--color-accent);
+}
+.portman-main {
+  flex: 1 1 auto;
+  width: 100vw;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: none;
+  padding-bottom: 2rem;
+}
+.portman-footer {
+  width: 100vw;
+  background: #181c24;
+  color: #b3c0ff;
+  padding: 2rem 0 1.2rem 0;
+  box-shadow: 0 -2px 16px #3949ab22;
+  margin-top: 2rem;
+}
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 2rem;
+}
+.footer-links, .footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.footer-links a, .footer-social a {
+  color: #b3c0ff;
+  text-decoration: none;
+  font-size: 1.05rem;
+  transition: color 0.2s;
+}
+.footer-links a:hover, .footer-social a:hover {
+  color: var(--color-accent);
+}
+@media (max-width: 900px) {
+  .header-content, .footer-content { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .portman-main { padding: 1rem 0.2rem; }
+}
+@media (max-width: 600px) {
+  .header-content, .footer-content { padding: 0 0.5rem; }
+  .logo { font-size: 1.3rem; }
+  nav { gap: 1rem; }
 }

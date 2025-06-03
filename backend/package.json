@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-maker-backend",
+  "version": "1.0.0",
+  "description": "PORTMAN Backend API Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node ../tests/backend_health.test.js",
+    "cv-parser": "python deepseek_cv_parser.py"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.1",
+    "multer": "^2.0.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "keywords": ["portfolio", "cv", "generator", "ai", "web"],
+  "author": "PORTMAN Team",
+  "license": "MIT"
+}

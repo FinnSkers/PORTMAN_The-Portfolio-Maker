@@ -1,8 +1,8 @@
-# PORTMAN_The-Portfolio-Maker
+# PORTMAN: The Portfolio Maker
 
-## CV-to-Dynamic-Website Generator
+## PORTMAN: CV-to-Dynamic-Website Generator
 
-A modern, open-source system that transforms a user's CV into a dynamic, multi-page, and responsive website using AI and modern web technologies. This project is fully dynamic, scalable, and extensible, with a focus on user experience, accessibility, and future enhancements.
+PORTMAN is a modern, open-source system that transforms a user's CV into a dynamic, multi-page, and responsive website using AI and modern web technologies. This project is fully dynamic, scalable, and extensible, with a focus on user experience, accessibility, and future enhancements.
 
 ---
 
@@ -88,7 +88,7 @@ A modern, open-source system that transforms a user's CV into a dynamic, multi-p
 1. Install dependencies:
    ```sh
    cd backend
-   npm install express cors multer
+   npm install express cors multer pdf-parse
    ```
 2. Start the backend server:
    ```sh
