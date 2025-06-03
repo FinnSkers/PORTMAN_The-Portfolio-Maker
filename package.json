@@ -1,0 +1,17 @@
+{
+  "name": "cv-website-generator",
+  "version": "0.1.0",
+  "description": "Generate a dynamic, multi-page website from a CV using AI and modern web tech.",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "backend": "node backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.0"
+  }
+}

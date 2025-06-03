@@ -1,0 +1,26 @@
+# Node.js
+node_modules/
+.env
+*.log
+npm-debug.log*
+dist/
+build/
+.next/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+uploads/
+coverage/
+.idea/
+.vscode/
+*.swp

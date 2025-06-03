@@ -1,0 +1,7 @@
+# Backend requirements for CV-to-Dynamic-Website Generator
+
+flask
+pdf-parse
+mammoth
+spacy
+openai
